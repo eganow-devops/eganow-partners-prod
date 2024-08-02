@@ -61,17 +61,17 @@ resource "kubernetes_deployment_v1" "egapay_mtn_gh" {
 
           env {
             name  = "REDIS_HOST"
-            value = "mtn-redis-ha"
+            value = helm_release.redis.outputs.0.host
           }
 
           env {
             name  = "REDIS_PORT"
-            value = "6379"
+            value = helm_release.redis.outputs.0.port
           }
 
           env {
             name  = "REDIS_PASSWORD"
-            value = ""
+            value = helm_release.redis.outputs.0.password
           }
 
           env {
