@@ -40,3 +40,15 @@ variable "domain_name" {
   description = "The domain name to use for the ingress"
   type        = string
 }
+
+variable "pay_partners_namespace" {
+  description = "The namespace of the project"
+  type        = string
+  default     = "ns-eganow-pay-partners"
+}
+
+variable "do_dns_token_name" {
+  description = "The name of the secret that contains the token"
+  type        = string
+  default     = "digitalocean-dns"
+}
