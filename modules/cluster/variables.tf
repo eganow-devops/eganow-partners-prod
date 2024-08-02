@@ -24,7 +24,7 @@ variable "cluster_eganow_name" {
 
 variable "cluster_eganow_vpc_ip_range" {
   description = "The IP range of the VPC"
-  default     = "10.106.10.0/24"
+  default     = "10.110.10.0/24"
 }
 
 variable "cluster_eganow_node_pool_size" {

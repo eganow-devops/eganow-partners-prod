@@ -35,3 +35,8 @@ variable "do_token" {
   description = "DigitalOcean API token"
   sensitive   = true
 }
+
+variable "domain_name" {
+  description = "The domain name to use for the ingress"
+  type        = string
+}
