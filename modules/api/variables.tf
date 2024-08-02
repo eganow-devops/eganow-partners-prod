@@ -59,6 +59,12 @@ variable "pay_partners_namespace" {
   default     = "ns-eganow-pay-partners"
 }
 
+variable "ingress_namespace" {
+  description = "The namespace of the ingress"
+  type        = string
+  default     = "ns-partners-ingress"
+}
+
 variable "eganow_key_vault_name" {
   description = "The name of the secret that contains the key vault"
   type        = string
@@ -69,7 +75,7 @@ variable "onepassword_credentials_json" {
   description = "The name of the secret that contains the 1password credentials"
   type = object({
     verifier = object({
-      salt       = string
+      salt      = string
       localHash = string
     })
     encCredentials = object({
@@ -79,7 +85,7 @@ variable "onepassword_credentials_json" {
       iv   = string
       data = string
     })
-    version     = string
+    version    = string
     deviceUuid = string
     uniqueKey = object({
       alg = string
@@ -90,4 +96,10 @@ variable "onepassword_credentials_json" {
       kid = string
     })
   })
+}
+
+variable "ingress_tls_secret_name" {
+  description = "The name of the secret that contains the TLS certificate"
+  type        = string
+  default     = "http-ingress-tls"
 }

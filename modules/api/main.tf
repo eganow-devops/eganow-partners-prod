@@ -12,7 +12,15 @@ terraform {
       source  = "alekc/kubectl"
       version = "~> 2.0.4"
     }
+    digitalocean = {
+      source  = "digitalocean/digitalocean"
+      version = "~> 2.39.2"
+    }
   }
+}
+
+provider "digitalocean" {
+  token = var.do_token
 }
 
 provider "kubernetes" {
@@ -35,41 +43,6 @@ provider "helm" {
     cluster_ca_certificate = var.k8s_cluster_ca_cert
   }
 }
-
-# module "deployment_svc" {
-#   source                   = "./deployment-svc"
-#   project_namespace        = module.namespace.project_namespace
-#   image_pull_secret = "" # @todo - add required value here from secrets
-#   op_connect_host = "" # @todo - add required value here from secrets
-#   op_token_key = "" # @todo - add required value here from secrets
-#   op_vault_key = "" # @todo - add required value here from secrets
-#   op_vault_secret = "" # @todo - add required value here from secrets
-#
-#   providers = {
-#     kubernetes = kubernetes
-#   }
-# }
-
-# module "secrets" {
-#   source            = "./secret"
-#   project_namespace = module.namespace.project_namespace
-#   do_token          = var.do_token
-#   providers = {
-#     kubernetes = kubernetes
-#   }
-# }
-#
-# module "ingress" {
-#   source            = "./ingress"
-#   project_namespace = module.namespace.project_namespace
-#   cluster_issuer    = var.cluster_issuer
-#   domain_name       = var.domain_name
-#   svc_mtngh_egapay  = module.services.svc_mtngh_egapay
-#   providers = {
-#     kubernetes = kubernetes
-#     helm       = helm
-#   }
-# }
 
 module "cert-manager" {
   source  = "terraform-iaac/cert-manager/kubernetes"

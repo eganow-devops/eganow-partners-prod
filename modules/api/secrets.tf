@@ -1,7 +1,7 @@
 resource "kubernetes_secret_v1" "digitalocean_dns_token" {
   metadata {
     name      = "digitalocean-dns"
-    namespace = var.pay_partners_namespace
+    namespace = module.cert-manager.namespace
   }
 
   data = {
