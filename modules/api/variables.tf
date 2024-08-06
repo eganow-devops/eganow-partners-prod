@@ -98,6 +98,19 @@ variable "onepassword_credentials_json" {
   })
 }
 
+variable "dockerconfigjson" {
+  description = "Docker config JSON needed to set up image pull credentials"
+  type = object({
+    auths = map(object({
+      username = string
+      password = string
+      email    = string
+      auth     = string
+    }))
+  })
+  sensitive = true
+}
+
 variable "ingress_tls_secret_name" {
   description = "The name of the secret that contains the TLS certificate"
   type        = string

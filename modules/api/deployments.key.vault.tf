@@ -87,8 +87,8 @@ resource "kubernetes_deployment_v1" "onepassword" {
               path = "/health"
               port = "api"
             }
-            initial_delay_seconds = 3
-            period_seconds        = 3
+            initial_delay_seconds = 5
+            period_seconds        = 5
           }
         }
 
@@ -138,8 +138,8 @@ resource "kubernetes_deployment_v1" "onepassword" {
               path = "/health"
               port = "sync"
             }
-            initial_delay_seconds = 3
-            period_seconds        = 3
+            initial_delay_seconds = 5
+            period_seconds        = 5
           }
         }
       }

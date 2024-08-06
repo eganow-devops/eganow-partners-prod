@@ -40,3 +40,34 @@ variable "onepassword_credentials_json" {
     })
   })
 }
+
+variable "dockerconfigjson" {
+  description = "Docker config JSON needed to set up image pull credentials"
+  type = object({
+    auths = map(object({
+      username = string
+      password = string
+      email    = string
+      auth     = string
+    }))
+  })
+  sensitive = true
+  default = {
+    auths = {
+      "dummy" = {
+        username = ""
+        password = ""
+        email    = ""
+        auth     = ""
+      }
+    }
+  }
+}
+
+variable "eganow_inbound_source_addresses" {
+  type = list(string)
+}
+
+variable "eganow_outbound_destination_addresses" {
+  type = list(string)
+}

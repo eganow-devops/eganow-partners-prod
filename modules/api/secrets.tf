@@ -34,3 +34,15 @@ resource "kubernetes_secret_v1" "onepassword_connect" {
     "1password-credentials.json" : jsonencode(var.onepassword_credentials_json)
   }
 }
+
+#  secret for dockerconfigjson
+resource "kubernetes_secret_v1" "dockerconfigjson" {
+  metadata {
+    name      = "dockerconfigjson"
+    namespace = var.pay_partners_namespace
+  }
+
+  data = {
+    ".dockerconfigjson" = jsonencode(var.dockerconfigjson)
+  }
+}

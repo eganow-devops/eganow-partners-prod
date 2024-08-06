@@ -19,18 +19,18 @@ resource "digitalocean_firewall" "eganow_core_firewall" {
   outbound_rule {
     protocol              = "tcp"
     port_range            = 443
-    destination_addresses = var.eganow_outbound_source_address
+    destination_addresses = var.eganow_outbound_destination_address
   }
 
   outbound_rule {
     protocol              = "tcp"
     port_range            = 25
-    destination_addresses = var.eganow_outbound_source_address
+    destination_addresses = var.eganow_outbound_destination_address
   }
 
   outbound_rule {
     protocol              = "tcp"
     port_range            = 587
-    destination_addresses = var.eganow_outbound_source_address
+    destination_addresses = var.eganow_outbound_destination_address
   }
 }
