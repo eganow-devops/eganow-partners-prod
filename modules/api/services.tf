@@ -9,8 +9,8 @@ resource "kubernetes_service_v1" "onepassword" {
       app = kubernetes_deployment_v1.onepassword.spec.0.selector.0.match_labels.app
     }
     port {
-      name        = "http"
-      port        = kubernetes_deployment_v1.onepassword.spec.0.template.0.spec.0.container.0.port.0.container_port
+      name        = var.secured_port_name
+      port        = var.secured_port
       target_port = kubernetes_deployment_v1.onepassword.spec.0.template.0.spec.0.container.0.port.0.container_port
     }
   }

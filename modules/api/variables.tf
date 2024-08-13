@@ -116,3 +116,15 @@ variable "ingress_tls_secret_name" {
   type        = string
   default     = "http-ingress-tls"
 }
+
+variable "secured_port" {
+  description = "The port to use for the secured service"
+  type        = number
+  default     = 443
+}
+
+variable "secured_port_name" {
+  description = "The name of the secured port"
+  type        = string
+  default     = "https"
+}
