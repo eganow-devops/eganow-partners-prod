@@ -76,7 +76,7 @@
 #
 #           env {
 #             name  = "OP_CONNECT_HOST"
-#             value = var.op_connect_host
+#             value = "http://${kubernetes_service_v1.onepassword.metadata.0.name}:${kubernetes_service_v1.onepassword.spec.0.port.0.port}"
 #           }
 #
 #           env {
