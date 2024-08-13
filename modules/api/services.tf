@@ -1,6 +1,6 @@
 resource "kubernetes_service_v1" "onepassword" {
   metadata {
-    name      = "onepassword-connect"
+    name      = "${kubernetes_deployment_v1.onepassword.metadata.0.name}-svc"
     namespace = var.pay_partners_namespace
   }
 
