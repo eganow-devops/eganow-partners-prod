@@ -51,6 +51,33 @@ variable "domain_name" {
 }
 
 #################################################
+# MONITORING & LOGGING (NEWRELIC)
+#################################################
+variable "newrelic_license_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "newrelic_cluster_name" {
+  type        = string
+  description = "The name of the cluster to monitor"
+  default     = "eganow-core"
+}
+
+variable "newrelic_namespace" {
+  type        = string
+  description = "The namespace to install New Relic"
+  default     = "ns-newrelic"
+}
+
+variable "newrelic_kube_state_metrics_version" {
+  type        = string
+  description = "The version of kube-state-metrics to install"
+  default     = "v2.10.0"
+}
+
+
+# ################################################
 # PROJECT RESOURCES (SECRETS, NAMESPACES ETC)
 #################################################
 variable "pay_partners_namespace" {
@@ -117,6 +144,12 @@ variable "ingress_tls_secret_name" {
   default     = "http-ingress-tls"
 }
 
+variable "insecure_port" {
+  description = "The port to use for the insecure service"
+  type        = number
+  default     = 8080
+}
+
 variable "secured_port" {
   description = "The port to use for the secured service"
   type        = number
@@ -127,4 +160,10 @@ variable "secured_port_name" {
   description = "The name of the secured port"
   type        = string
   default     = "https"
+}
+
+variable "onepassword_token" {
+  description = "The token of the 1password secret"
+  type        = string
+  sensitive   = true
 }

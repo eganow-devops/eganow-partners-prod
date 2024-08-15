@@ -22,6 +22,8 @@ module "api" {
   domain_name                  = var.domain_name
   onepassword_credentials_json = var.onepassword_credentials_json
   dockerconfigjson             = var.dockerconfigjson
+  newrelic_license_key         = var.newrelic_license_key
+  onepassword_token            = var.onepassword_token
 
   do_token             = var.do_token
   cluster_issuer_email = var.cluster_issuer_email

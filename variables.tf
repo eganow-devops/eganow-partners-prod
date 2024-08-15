@@ -71,3 +71,14 @@ variable "eganow_inbound_source_addresses" {
 variable "eganow_outbound_destination_addresses" {
   type = list(string)
 }
+
+variable "newrelic_license_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "onepassword_token" {
+  description = "The token of the 1password secret"
+  type        = string
+  sensitive   = true
+}
