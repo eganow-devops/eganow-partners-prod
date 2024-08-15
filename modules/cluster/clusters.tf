@@ -19,5 +19,6 @@ resource "digitalocean_kubernetes_cluster" "eganow_cluster" {
     day        = var.cluster_maintenance_day
   }
 
+  destroy_all_associated_resources = true
   depends_on = [digitalocean_vpc.eganow_vpc]
 }
