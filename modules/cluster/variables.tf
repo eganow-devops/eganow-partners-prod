@@ -60,11 +60,9 @@ variable "cluster_maintenance_day" {
 variable "eganow_inbound_source_address" {
   type = set(string)
   description = "The source addresses for the inbound rules for cluster"
-  default = ["0.0.0.0/0", "::/0"]
 }
 
-variable "eganow_outbound_source_address" {
+variable "eganow_outbound_destination_address" {
   type = set(string)
   description = "The source addresses for the outbound rules for cluster"
-  default = ["0.0.0.0/0", "::/0"]
 }
