@@ -5,10 +5,9 @@ data "kubernetes_service_v1" "ingress_lb" {
   }
 }
 
-#     @TODO(1PASSWORD)
-# data "kubernetes_service_v1" "onepassword" {
-#   metadata {
-#     name      = helm_release.onepassword.name
-#     namespace = var.pay_partners_namespace
-#   }
-# }
+data "kubernetes_service_v1" "onepassword" {
+  metadata {
+    name      = helm_release.onepassword.name
+    namespace = var.pay_partners_namespace
+  }
+}
