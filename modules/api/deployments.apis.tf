@@ -5,7 +5,7 @@ resource "kubernetes_deployment_v1" "mtn_gh_mad_api_name_enquiry" {
   }
 
   spec {
-    replicas = var.max_pod_replicas
+    replicas = var.min_pod_replicas
 
     selector {
       match_labels = {
