@@ -57,12 +57,14 @@ variable "cluster_maintenance_day" {
   type        = string
 }
 
-variable "eganow_inbound_source_address" {
+variable "eganow_inbound_source_addresses" {
   type = set(string)
   description = "The source addresses for the inbound rules for cluster"
+  sensitive = true
 }
 
-variable "eganow_outbound_destination_address" {
+variable "eganow_outbound_destination_addresses" {
   type = set(string)
   description = "The source addresses for the outbound rules for cluster"
+  sensitive = true
 }
