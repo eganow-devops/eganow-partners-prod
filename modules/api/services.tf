@@ -23,7 +23,7 @@ resource "kubernetes_service_v1" "mtn_gh_mad_api_name_enquiry" {
 
   spec {
     selector = {
-      app = kubernetes_deployment_v1.mtn_gh_mad_api_name_enquiry.metadata.0.name
+      app = kubernetes_deployment_v1.mtn_gh_mad_api_name_enquiry.spec.0.selector.0.match_labels.app
     }
 
     port {

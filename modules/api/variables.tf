@@ -185,3 +185,13 @@ variable "max_pod_replicas" {
   type        = number
   default     = 3
 }
+
+variable "lb_inbound_source_addresses" {
+  type = set(string)
+  description = "The source addresses for the inbound rules for load balancer"
+}
+
+variable "lb_outbound_destination_addresses" {
+  type = set(string)
+  description = "The source addresses for the outbound rules for load balancer"
+}

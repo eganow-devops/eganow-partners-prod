@@ -72,6 +72,16 @@ variable "eganow_outbound_destination_addresses" {
   type = list(string)
 }
 
+variable "lb_inbound_source_addresses" {
+  type = set(string)
+  description = "The source addresses for the inbound rules for load balancer"
+}
+
+variable "lb_outbound_destination_addresses" {
+  type = set(string)
+  description = "The source addresses for the outbound rules for load balancer"
+}
+
 variable "newrelic_license_key" {
   type      = string
   sensitive = true
