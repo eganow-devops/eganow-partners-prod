@@ -45,7 +45,7 @@ resource "helm_release" "newrelic" {
 
   set {
     name  = "kube-state-metrics.enabled"
-    value = "true"
+    value = "false"
   }
 
   set {
