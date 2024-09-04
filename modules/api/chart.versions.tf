@@ -21,3 +21,9 @@ variable "newrelic_version" {
   type        = string
   default     = "5.0.89"
 }
+
+variable "openvpn_version" {
+  description = "The version of the OpenVPN chart"
+  type        = string
+  default     = "4.2.5"
+}

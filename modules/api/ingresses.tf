@@ -56,16 +56,34 @@ resource "kubernetes_ingress_v1" "http_ing" {
     }
 
     rule {
-      host = "${digitalocean_record.mtngh_mad_api_name_enquiry.name}.${var.domain_name}"
+      host = "${digitalocean_record.mtngh_mad_api_egapay.name}.${var.domain_name}"
       http {
         path {
-          path      = "/api/v1/enquiries"
+          path      = "/api/v1"
           path_type = "Prefix"
           backend {
             service {
-              name = kubernetes_service_v1.mtn_gh_mad_api_name_enquiry.metadata.0.name
+              name = kubernetes_service_v1.mtn_gh_mad_api_egapay.metadata.0.name
               port {
-                name = kubernetes_service_v1.mtn_gh_mad_api_name_enquiry.spec.0.port.0.name
+                name = kubernetes_service_v1.mtn_gh_mad_api_egapay.spec.0.port.0.name
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "${digitalocean_record.mtngh_mad_api_pospay.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/api/v1"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.mtn_gh_mad_api_pospay.metadata.0.name
+              port {
+                name = kubernetes_service_v1.mtn_gh_mad_api_pospay.spec.0.port.0.name
               }
             }
           }
@@ -99,16 +117,34 @@ resource "kubernetes_ingress_v1" "grpc_ing" {
     }
 
     rule {
-      host = "${digitalocean_record.mtngh_mad_api_name_enquiry.name}.${var.domain_name}"
+      host = "${digitalocean_record.mtngh_mad_api_egapay.name}.${var.domain_name}"
       http {
         path {
           path      = "/"
           path_type = "Prefix"
           backend {
             service {
-              name = kubernetes_service_v1.mtn_gh_mad_api_name_enquiry.metadata.0.name
+              name = kubernetes_service_v1.mtn_gh_mad_api_egapay.metadata.0.name
               port {
-                name = kubernetes_service_v1.mtn_gh_mad_api_name_enquiry.spec.0.port.1.name
+                name = kubernetes_service_v1.mtn_gh_mad_api_egapay.spec.0.port.1.name
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "${digitalocean_record.mtngh_mad_api_pospay.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.mtn_gh_mad_api_pospay.metadata.0.name
+              port {
+                name = kubernetes_service_v1.mtn_gh_mad_api_pospay.spec.0.port.1.name
               }
             }
           }
