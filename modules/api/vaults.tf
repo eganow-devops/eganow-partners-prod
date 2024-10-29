@@ -20,11 +20,6 @@ resource "helm_release" "onepassword" {
     value = "onepassword-credentials"
   }
 
-  #   set {
-  #     name  = "connect.credentials_base64"
-  #     value = kubernetes_secret_v1.onepassword_connect.data.onepassword-credentials
-  #   }
-
   set {
     name  = "operator.create"
     value = "true"

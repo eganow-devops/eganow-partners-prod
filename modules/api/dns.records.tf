@@ -30,9 +30,30 @@ resource "digitalocean_record" "mtngh_mad_api_pospay" {
   value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
 }
 
-resource "digitalocean_record" "ghipss_api_name_enquiry" {
+resource "digitalocean_record" "ndc_volta_ussd" {
+  domain = digitalocean_domain.payment.id
+  name   = "ndcvolta-ussd"
+  type   = "A"
+  value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
+}
+
+resource "digitalocean_record" "ndc_volta_api" {
+  domain = digitalocean_domain.payment.id
+  name   = "ndcvolta"
+  type   = "A"
+  value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
+}
+
+resource "digitalocean_record" "ndc_volta_callback" {
+  domain = digitalocean_domain.payment.id
+  name   = "ndcvolta-callback"
+  type   = "A"
+  value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
+}
+
+resource "digitalocean_record" "ghipss_api" {
   domain = digitalocean_domain.payment.id
   name   = "ghipss"
   type   = "A"
-  value  = "172.208.35.26"
+  value  = var.ghipss_iis_ip_address
 }
