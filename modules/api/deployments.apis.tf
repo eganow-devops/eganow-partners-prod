@@ -465,6 +465,7 @@ resource "kubernetes_deployment_v1" "ndc_progressive_api" {
     }
   }
 }
+# endregion
 
 resource "kubernetes_deployment_v1" "ndc_progressive_callback" {
   metadata {
@@ -500,6 +501,105 @@ resource "kubernetes_deployment_v1" "ndc_progressive_callback" {
           port {
             container_port = 80
             name           = "http"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+
+# region NPP ETORNAM
+resource "kubernetes_deployment_v1" "npp_etornam_ussd" {
+  metadata {
+    name      = "npp-etornam-ussd"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "npp-etornam-ussd"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "npp-etornam-ussd"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-npp-etornam-ussd-dotnet-api:latest"
+          name              = "npp-etornam-ussd"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "http"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+
+resource "kubernetes_deployment_v1" "npp_etornam_api" {
+  metadata {
+    name      = "npp-etornam-api"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "npp-etornam-api"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "npp-etornam-api"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-npp-etornam-dotnet-api:latest"
+          name              = "npp-etornam-api"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "grpc"
           }
         }
       }
