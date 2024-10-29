@@ -51,6 +51,27 @@ resource "digitalocean_record" "ndc_volta_callback" {
   value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
 }
 
+resource "digitalocean_record" "ndc_progressive_ussd" {
+  domain = digitalocean_domain.payment.id
+  name   = "ndcprogressive-ussd"
+  type   = "A"
+  value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
+}
+
+resource "digitalocean_record" "ndc_progressive_api" {
+  domain = digitalocean_domain.payment.id
+  name   = "ndcprogressive"
+  type   = "A"
+  value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
+}
+
+resource "digitalocean_record" "ndc_progressive_callback" {
+  domain = digitalocean_domain.payment.id
+  name   = "ndcprogressive-callback"
+  type   = "A"
+  value  = data.kubernetes_service_v1.ingress_lb.status.0.load_balancer.0.ingress.0.ip
+}
+
 resource "digitalocean_record" "ghipss_api" {
   domain = digitalocean_domain.payment.id
   name   = "ghipss"
