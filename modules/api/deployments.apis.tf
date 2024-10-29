@@ -59,7 +59,7 @@ resource "kubernetes_deployment_v1" "mtn_gh_mad_api_egapay" {
   }
 
   spec {
-    replicas = var.min_pod_replicas
+    replicas = 0//var.min_pod_replicas
 
     selector {
       match_labels = {
@@ -142,7 +142,7 @@ resource "kubernetes_deployment_v1" "mtn_gh_mad_api_pospay" {
   }
 
   spec {
-    replicas = var.min_pod_replicas
+    replicas = 0//var.min_pod_replicas
 
     selector {
       match_labels = {
