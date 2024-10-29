@@ -90,6 +90,78 @@ resource "kubernetes_ingress_v1" "http_ing" {
         }
       }
     }
+
+    rule {
+      host = "${digitalocean_record.ndc_volta_ussd.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.ndc_volta_ussd.metadata.0.name
+              port {
+                name = kubernetes_service_v1.ndc_volta_ussd.spec.0.port.0.name
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "${digitalocean_record.ndc_volta_callback.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.ndc_volta_callback.metadata.0.name
+              port {
+                name = kubernetes_service_v1.ndc_volta_callback.spec.0.port.0.name
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "${digitalocean_record.ndc_progressive_ussd.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.ndc_progressive_ussd.metadata.0.name
+              port {
+                name = kubernetes_service_v1.ndc_progressive_ussd.spec.0.port.0.name
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "${digitalocean_record.ndc_progressive_callback.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.ndc_progressive_callback.metadata.0.name
+              port {
+                name = kubernetes_service_v1.ndc_progressive_callback.spec.0.port.0.name
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -145,6 +217,42 @@ resource "kubernetes_ingress_v1" "grpc_ing" {
               name = kubernetes_service_v1.mtn_gh_mad_api_pospay.metadata.0.name
               port {
                 name = kubernetes_service_v1.mtn_gh_mad_api_pospay.spec.0.port.1.name
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "${digitalocean_record.ndc_volta_api.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.ndc_volta_api.metadata.0.name
+              port {
+                name = kubernetes_service_v1.ndc_volta_api.spec.0.port.0.name
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "${digitalocean_record.ndc_progressive_api.name}.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = kubernetes_service_v1.ndc_progressive_api.metadata.0.name
+              port {
+                name = kubernetes_service_v1.ndc_progressive_api.spec.0.port.0.name
               }
             }
           }

@@ -40,6 +40,11 @@ variable "onepassword_credentials_json" {
     })
   })
 }
+variable "onepassword_token" {
+  description = "The token of the 1password secret"
+  type        = string
+  sensitive   = true
+}
 
 variable "dockerconfigjson" {
   description = "Docker config JSON needed to set up image pull credentials"
@@ -87,8 +92,15 @@ variable "newrelic_license_key" {
   sensitive = true
 }
 
-variable "onepassword_token" {
-  description = "The token of the 1password secret"
+variable "redis_password" {
+  description = "Redis password"
   type        = string
+  default     = "Password for Redis cluster"
+  sensitive   = true
+}
+
+variable "ghipss_iis_ip_address" {
+  type        = string
+  description = "The IP address of the GHIPSS IIS instance"
   sensitive   = true
 }

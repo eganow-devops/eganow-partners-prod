@@ -26,6 +26,7 @@ module "api" {
   onepassword_token                 = var.onepassword_token
   lb_inbound_source_addresses       = var.lb_inbound_source_addresses
   lb_outbound_destination_addresses = var.lb_outbound_destination_addresses
+  ghipss_iis_ip_address             = var.ghipss_iis_ip_address
 
   do_token             = var.do_token
   cluster_issuer_email = var.cluster_issuer_email

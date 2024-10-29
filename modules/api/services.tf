@@ -39,7 +39,6 @@ data "kubernetes_service_v1" "onepassword" {
 #     }
 #   }
 # }
-
 resource "kubernetes_service_v1" "mtn_gh_mad_api_egapay" {
   metadata {
     name      = "${kubernetes_deployment_v1.mtn_gh_mad_api_egapay.metadata.0.name}-svc"
@@ -86,6 +85,120 @@ resource "kubernetes_service_v1" "mtn_gh_mad_api_pospay" {
       name        = "grpc"
       port        = kubernetes_deployment_v1.mtn_gh_mad_api_pospay.spec.0.template.0.spec.0.container.0.port.1.container_port
       target_port = kubernetes_deployment_v1.mtn_gh_mad_api_pospay.spec.0.template.0.spec.0.container.0.port.1.container_port
+    }
+  }
+}
+
+resource "kubernetes_service_v1" "ndc_volta_api" {
+  metadata {
+    name      = "${kubernetes_deployment_v1.ndc_volta_api.metadata.0.name}-svc"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    selector = {
+      app = kubernetes_deployment_v1.ndc_volta_api.spec.0.selector.0.match_labels.app
+    }
+
+    port {
+      name        = "grpc"
+      port        = kubernetes_deployment_v1.ndc_volta_api.spec.0.template.0.spec.0.container.0.port.0.container_port
+      target_port = kubernetes_deployment_v1.ndc_volta_api.spec.0.template.0.spec.0.container.0.port.0.container_port
+    }
+  }
+}
+
+resource "kubernetes_service_v1" "ndc_volta_ussd" {
+  metadata {
+    name      = "${kubernetes_deployment_v1.ndc_volta_ussd.metadata.0.name}-svc"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    selector = {
+      app = kubernetes_deployment_v1.ndc_volta_ussd.spec.0.selector.0.match_labels.app
+    }
+
+    port {
+      name        = "http"
+      port        = kubernetes_deployment_v1.ndc_volta_ussd.spec.0.template.0.spec.0.container.0.port.0.container_port
+      target_port = kubernetes_deployment_v1.ndc_volta_ussd.spec.0.template.0.spec.0.container.0.port.0.container_port
+    }
+  }
+}
+
+resource "kubernetes_service_v1" "ndc_volta_callback" {
+  metadata {
+    name      = "${kubernetes_deployment_v1.ndc_volta_callback.metadata.0.name}-svc"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    selector = {
+      app = kubernetes_deployment_v1.ndc_volta_callback.spec.0.selector.0.match_labels.app
+    }
+
+    port {
+      name        = "http"
+      port        = kubernetes_deployment_v1.ndc_volta_callback.spec.0.template.0.spec.0.container.0.port.0.container_port
+      target_port = kubernetes_deployment_v1.ndc_volta_callback.spec.0.template.0.spec.0.container.0.port.0.container_port
+    }
+  }
+}
+
+resource "kubernetes_service_v1" "ndc_progressive_api" {
+  metadata {
+    name      = "${kubernetes_deployment_v1.ndc_progressive_api.metadata.0.name}-svc"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    selector = {
+      app = kubernetes_deployment_v1.ndc_progressive_api.spec.0.selector.0.match_labels.app
+    }
+
+    port {
+      name        = "grpc"
+      port        = kubernetes_deployment_v1.ndc_progressive_api.spec.0.template.0.spec.0.container.0.port.0.container_port
+      target_port = kubernetes_deployment_v1.ndc_progressive_api.spec.0.template.0.spec.0.container.0.port.0.container_port
+    }
+  }
+}
+
+resource "kubernetes_service_v1" "ndc_progressive_ussd" {
+  metadata {
+    name      = "${kubernetes_deployment_v1.ndc_progressive_ussd.metadata.0.name}-svc"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    selector = {
+      app = kubernetes_deployment_v1.ndc_progressive_ussd.spec.0.selector.0.match_labels.app
+    }
+
+    port {
+      name        = "http"
+      port        = kubernetes_deployment_v1.ndc_progressive_ussd.spec.0.template.0.spec.0.container.0.port.0.container_port
+      target_port = kubernetes_deployment_v1.ndc_progressive_ussd.spec.0.template.0.spec.0.container.0.port.0.container_port
+    }
+  }
+}
+
+resource "kubernetes_service_v1" "ndc_progressive_callback" {
+  metadata {
+    name      = "${kubernetes_deployment_v1.ndc_progressive_callback.metadata.0.name}-svc"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    selector = {
+      app = kubernetes_deployment_v1.ndc_progressive_callback.spec.0.selector.0.match_labels.app
+    }
+
+    port {
+      name        = "http"
+      port        = kubernetes_deployment_v1.ndc_progressive_callback.spec.0.template.0.spec.0.container.0.port.0.container_port
+      target_port = kubernetes_deployment_v1.ndc_progressive_callback.spec.0.template.0.spec.0.container.0.port.0.container_port
     }
   }
 }

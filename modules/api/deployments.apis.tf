@@ -59,7 +59,7 @@ resource "kubernetes_deployment_v1" "mtn_gh_mad_api_egapay" {
   }
 
   spec {
-    replicas = var.min_pod_replicas
+    replicas = 0//var.min_pod_replicas
 
     selector {
       match_labels = {
@@ -142,7 +142,7 @@ resource "kubernetes_deployment_v1" "mtn_gh_mad_api_pospay" {
   }
 
   spec {
-    replicas = var.min_pod_replicas
+    replicas = 0//var.min_pod_replicas
 
     selector {
       match_labels = {
@@ -203,6 +203,303 @@ resource "kubernetes_deployment_v1" "mtn_gh_mad_api_pospay" {
           port {
             container_port = 443
             name           = "grpc"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+
+# region NDC VOLTA
+resource "kubernetes_deployment_v1" "ndc_volta_ussd" {
+  metadata {
+    name      = "ndc-volta-ussd"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "ndc-volta-ussd"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "ndc-volta-ussd"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-ndc-volta-ussd-dotnet-api:latest"
+          name              = "ndc-volta-ussd"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "http"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+
+resource "kubernetes_deployment_v1" "ndc_volta_api" {
+  metadata {
+    name      = "ndc-volta-api"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "ndc-volta-api"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "ndc-volta-api"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-ndc-volta-dotnet-api:latest"
+          name              = "ndc-volta-api"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "grpc"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+
+resource "kubernetes_deployment_v1" "ndc_volta_callback" {
+  metadata {
+    name      = "ndc-volta-callback"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "ndc-volta-callback"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "ndc-volta-callback"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-ndc-volta-callback-dotnet-api:latest"
+          name              = "ndc-volta-callback"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "http"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+# endregion
+
+# region NDC PROGRESSIVE
+resource "kubernetes_deployment_v1" "ndc_progressive_ussd" {
+  metadata {
+    name      = "ndc-progressive-ussd"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "ndc-progressive-ussd"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "ndc-progressive-ussd"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-ndc-progressive-ussd-dotnet-api:latest"
+          name              = "ndc-progressive-ussd"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "http"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+
+resource "kubernetes_deployment_v1" "ndc_progressive_api" {
+  metadata {
+    name      = "ndc-progressive-api"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "ndc-progressive-api"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "ndc-progressive-api"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-ndc-progressive-dotnet-api:latest"
+          name              = "ndc-progressive-api"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "grpc"
+          }
+        }
+      }
+    }
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge       = "25%"
+        max_unavailable = "25%"
+      }
+    }
+  }
+}
+
+resource "kubernetes_deployment_v1" "ndc_progressive_callback" {
+  metadata {
+    name      = "ndc-progressive-callback"
+    namespace = var.pay_partners_namespace
+  }
+
+  spec {
+    replicas = var.min_pod_replicas
+
+    selector {
+      match_labels = {
+        app = "ndc-progressive-callback"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "ndc-progressive-callback"
+        }
+      }
+
+      spec {
+        image_pull_secrets {
+          name = kubernetes_secret_v1.dockerconfigjson.metadata.0.name
+        }
+        container {
+          image             = "eganowdevops/eganow-ndc-progressive-callback-dotnet-api:latest"
+          name              = "ndc-progressive-callback"
+          image_pull_policy = "Always"
+
+          port {
+            container_port = 80
+            name           = "http"
           }
         }
       }
